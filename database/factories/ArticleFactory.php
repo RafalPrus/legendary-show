@@ -20,10 +20,10 @@ class ArticleFactory extends Factory
     {
         return [
             //
-            'name' => fake()->sentence(),
-            'excerpt' => fake()->paragraphs(2, true),
+            'name' => fake()->words(3, true),
+            'excerpt' => fake()->sentence(),
             'description' => fake()->paragraphs(6, true),
-            'category' => fake()->slug(),
+            'category' => fake()->word(),
             'release_year' => fake()->numberBetween(1920, 2023),
             'author_id' => Author::factory(),
         ];
