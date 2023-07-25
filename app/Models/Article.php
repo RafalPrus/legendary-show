@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
+
+    public function author()
+    {
+        return $this->belongsTo(Author::class, 'author_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'article_id');
+    }
 }
