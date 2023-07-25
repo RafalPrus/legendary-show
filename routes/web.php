@@ -18,3 +18,7 @@ Route::get('/', function () {
     $articles = Article::all();
     return view('index', ['articles' => $articles]);
 });
+
+Route::get('/articles/{article}', function(Article $article) {
+    return view('show', ['article' => $article]);
+});
