@@ -8,7 +8,7 @@
     <h4 class="mt-2 text-xs text-gray-500">{{ $article->excerpt }}</h4>
     <h4 class="mt-2 text-xs text-gray-600">{{ $article->release_year }}</h4>
     <x-badge class="text-xs">
-        {{ $article->category }}
+        {{ $article->category->name }}
     </x-badge>
 
 </a>
