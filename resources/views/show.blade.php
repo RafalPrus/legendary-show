@@ -1,24 +1,3 @@
-<!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        gridTemplateRows: {
-          '[auto,auto,1fr]': 'auto auto 1fr',
-        },
-      },
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
 <x-layout heading="Details">
 <div class="bg-white">
     <div class="pt-6">
@@ -26,7 +5,7 @@
             <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <li>
                     <div class="flex items-center">
-                        <a href="#" class="mr-2 text-sm font-medium text-gray-900">Men</a>
+                        <a href="/?category={{ $article->category->name }}" class="mr-2 text-sm font-medium text-gray-900">{{ strtoupper($article->category->name) }}</a>
                         <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="h-5 w-4 text-gray-300">
                             <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                         </svg>
@@ -34,15 +13,8 @@
                 </li>
                 <li>
                     <div class="flex items-center">
-                        <a href="#" class="mr-2 text-sm font-medium text-gray-900">Clothing</a>
-                        <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="h-5 w-4 text-gray-300">
-                            <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                        </svg>
+                        <a href="/articles/{{ $article->id }}" class="mr-2 text-sm font-medium text-gray-500 hover:text-gray-600">{{ strtoupper($article->name) }}</a>
                     </div>
-                </li>
-
-                <li class="text-sm">
-                    <a href="#" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">Basic Tee 6-Pack</a>
                 </li>
             </ol>
         </nav>
@@ -57,14 +29,14 @@
         <!-- Product info -->
         <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
             <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ $article->name }}</h1>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ ucwords($article->name) }}</h1>
             </div>
 
             <!-- Options -->
             <div class="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 class="sr-only">Product information</h2>
                 <x-badge class="text-2xl">
-                    {{ $article->category }}
+                    {{ $article->category->name }}
                 </x-badge>
 
                 <!-- Reviews -->
@@ -111,20 +83,24 @@
                     <div class="mt-4">
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             <li class="text-gray-400"><span class="text-gray-600">Author: {{ $article->author->name }}</span></li>
-                            <li class="text-gray-400"><span class="text-gray-600">Dyed with our proprietary colors</span></li>
-                            <li class="text-gray-400"><span class="text-gray-600">Pre-washed &amp; pre-shrunk</span></li>
-                            <li class="text-gray-400"><span class="text-gray-600">Ultra-soft 100% cotton</span></li>
+                            <li class="text-gray-400"><span class="text-gray-600">Release year: {{ $article->release_year }}</span></li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="mt-10">
+                <div class="mt-10 mb-10">
                     <h2 class="text-sm font-medium text-gray-900">Description</h2>
 
                     <div class="mt-4 space-y-6">
                         <p class="text-sm text-gray-600">{{ $article->description }}</p>
                     </div>
                 </div>
+                <h2 class="text-sm font-medium text-gray-900">Comments</h2>
+                @foreach($article->comments as $comment)
+                <x-panel>
+                    <x-comment.post-comment :comment="$comment"/>
+                </x-panel>
+                @endforeach
             </div>
         </div>
     </div>

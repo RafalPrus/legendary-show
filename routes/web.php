@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
@@ -14,11 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $articles = Article::all();
-    return view('index', ['articles' => $articles]);
-});
+Route::get('/', [ArticleController::class, 'index'])->name('home');
+Route::get('articles/{article}', [ArticleController::class, 'show']);
 
-Route::get('/articles/{article}', function(Article $article) {
-    return view('show', ['article' => $article]);
-});
+Route::get('register', [RegisterController::class, 'create']);
+Route::post('register', [RegisterController::class, 'store']);
+
+Route::post('logout', [SessionController::class, 'destroy']);
