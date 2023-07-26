@@ -6,14 +6,15 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+            <form class="space-y-6" action="/register" method="POST">
+                @csrf
                 <div>
                     <x-form.label name="email"/>
                     <x-form.input name="email" type="email"/>
                 </div>
                 <div>
-                    <x-form.label name="username"/>
-                    <x-form.input name="username"/>
+                    <x-form.label name="name"/>
+                    <x-form.input name="name"/>
                 </div>
                 <div>
                     <x-form.label name="password"/>
