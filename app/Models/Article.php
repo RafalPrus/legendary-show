@@ -11,6 +11,8 @@ class Article extends Model
 
     protected $with = ['category'];
 
+    protected $guarded = [];
+
     public function scopeFilter($query, array $filters = null)
     {
 //        if (!empty($filters)) {
