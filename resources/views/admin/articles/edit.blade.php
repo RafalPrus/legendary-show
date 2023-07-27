@@ -38,6 +38,12 @@
                         <x-form.textarea name="description" :value="$article->description"/>
                     </div>
                 </div>
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-4">
+                        <x-form.label name="year"/>
+                        <x-form.input name="release_year" type="text" :value="$article->release_year"/>
+                    </div>
+                </div>
                 @error('success')
                 <p class="text-green-500 text-xs mt-2">{{ $message }}</p>
                 @enderror

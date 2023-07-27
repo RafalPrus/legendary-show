@@ -33,7 +33,8 @@ Route::get('users/{user}/edit', [UserController::class, 'edit'])->middleware(['a
 Route::patch('users/{user}', [UserController::class, 'update'])->middleware('auth');
 
 // Admin
-Route::get('admin/articles', [AdminController::class, 'index'])->middleware('auth');
-Route::get('admin/articles/{article}/edit', [AdminController::class, 'edit'])->middleware('auth');
+Route::get('admin/articles', [AdminController::class, 'index'])->middleware('admin');
+Route::get('admin/articles/{article}/edit', [AdminController::class, 'edit'])->middleware('admin');
+Route::patch('admin/articles/{article}/update', [AdminController::class, 'update'])->middleware('admin');
 
 

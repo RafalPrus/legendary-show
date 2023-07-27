@@ -18,4 +18,23 @@ class AdminController extends Controller
     {
         return view('admin.articles.edit', ['article' => $article]);
     }
+
+    public function update(Request $request, Article $article)
+    {
+        $values = $request->validate([
+            'name' => 'required',
+            'excerpt' => 'required|min:15|max:255',
+            'description' => 'required|min:100',
+            'release_year' => 'required|numeric|min:1900|max:2023'
+        ]);
+
+        $article->update($values);
+
+
+
+        return back()
+            ->withErrors([
+                'success' => 'Updated! Congrats!'
+            ]);
+    }
 }
