@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -28,6 +29,12 @@ Route::get('login', [SessionController::class, 'create'])->middleware('guest');
 Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
-Route::get('users/{user}/edit', [UserController::class, 'edit'])->middleware('auth');
+Route::get('users/{user}/edit', [UserController::class, 'edit'])->middleware(['auth']);
 Route::patch('users/{user}', [UserController::class, 'update'])->middleware('auth');
+
+// Admin
+Route::get('admin/articles', [AdminController::class, 'index'])->middleware('admin');
+Route::get('admin/articles/{article}/edit', [AdminController::class, 'edit'])->middleware('admin');
+Route::patch('admin/articles/{article}/update', [AdminController::class, 'update'])->middleware('admin');
+
 
