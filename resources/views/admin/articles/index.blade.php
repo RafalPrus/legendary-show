@@ -22,11 +22,11 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <form method="POST" action="/admin/articles/{{ $article->id }}">
+                                        <form method="POST" action="/admin/articles/{{ $article->id }}/delete">
                                             @csrf
                                             @method('DELETE')
 
-                                            <button class="text-xs text-gray-400">Delete</button>
+                                            <button class="text-xs text-red-500">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -36,5 +36,6 @@ Route::patch('users/{user}', [UserController::class, 'update'])->middleware('aut
 Route::get('admin/articles', [AdminController::class, 'index'])->middleware('admin');
 Route::get('admin/articles/{article}/edit', [AdminController::class, 'edit'])->middleware('admin');
 Route::patch('admin/articles/{article}/update', [AdminController::class, 'update'])->middleware('admin');
+Route::delete('admin/articles/{article}/delete', [AdminController::class, 'destroy'])->middleware('admin');
 
 
