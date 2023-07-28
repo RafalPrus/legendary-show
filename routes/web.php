@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -31,6 +32,9 @@ Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth')
 
 Route::get('users/{user}/edit', [UserController::class, 'edit'])->middleware(['auth']);
 Route::patch('users/{user}', [UserController::class, 'update'])->middleware('auth');
+
+// User
+Route::post('articles/{article}/comment', [ArticleCommentController::class, 'store'])->middleware('auth');
 
 // Admin
 Route::get('admin/articles', [AdminController::class, 'index'])->middleware('admin');
