@@ -2,7 +2,8 @@
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <a href="/admin/articles/create" class="rounded-md bg-indigo-600 px-3 py-2 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add new Article</a>
+                    <div class="mt-4 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($articles as $article)

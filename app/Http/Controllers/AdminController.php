@@ -25,7 +25,7 @@ class AdminController extends Controller
             'name' => 'required',
             'excerpt' => 'required|min:15|max:255',
             'description' => 'required|min:100',
-            'release_year' => 'required|numeric|min:1900|max:2023'
+            'release_year' => 'required|numeric|min:1900|max:2023',
         ]);
 
         $article->update($values);
@@ -43,5 +43,10 @@ class AdminController extends Controller
         Article::destroy([$article->id]);
 
         return back();
+    }
+
+    public function create()
+    {
+        return view('admin.articles.create');
     }
 }
