@@ -37,4 +37,11 @@ class AdminController extends Controller
                 'success' => 'Updated! Congrats!'
             ]);
     }
+
+    public function destroy(Article $article)
+    {
+        Article::destroy([$article->id]);
+
+        return back();
+    }
 }
