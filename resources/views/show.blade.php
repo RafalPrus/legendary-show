@@ -34,7 +34,7 @@
 
             <!-- Options -->
             <div class="mt-4 lg:row-span-3 lg:mt-0">
-                <h2 class="sr-only">Product information</h2>
+                <h2 class="sr-only">Article information</h2>
                 <x-badge class="text-2xl">
                     {{ $article->category->name }}
                 </x-badge>
@@ -96,7 +96,19 @@
                     </div>
                 </div>
                 <h2 class="text-sm font-medium text-gray-900">Comments</h2>
-                @foreach($article->comments as $comment)
+                @auth
+                    <form action="/articles/{{ $article->id }}/comment" method="POST">
+                        @csrf
+                        <x-form.textarea name="body" placeholder="Write your comment here..." />
+                        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add</button>
+                    </form>
+                @else
+                    <h3 class="text-sm font-medium text-gray-900 mt-2">
+                        <a href="/login" class="mr-2 text-sm font-medium text-blue-500">Log In</a>or
+                        <a href="/register" class="mr-2 text-sm font-medium text-blue-500">Register</a>to write a comment!
+                    </h3>
+                @endauth
+                @foreach($article->comments->sortByDesc('created_at') as $comment)
                 <x-panel>
                     <x-comment.post-comment :comment="$comment"/>
                 </x-panel>
