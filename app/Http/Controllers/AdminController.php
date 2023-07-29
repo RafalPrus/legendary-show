@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Author;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -16,7 +18,14 @@ class AdminController extends Controller
 
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', ['article' => $article]);
+        $authors = Author::all();
+        $categories = Category::all();
+
+        return view('admin.articles.edit', [
+            'article' => $article,
+            'authors' => $authors,
+            'categories' => $categories
+        ]);
     }
 
     public function update(Request $request, Article $article)
@@ -25,7 +34,9 @@ class AdminController extends Controller
             'name' => 'required',
             'excerpt' => 'required|min:15|max:255',
             'description' => 'required|min:100',
-            'release_year' => 'required|numeric|min:1900|max:2023'
+            'release_year' => 'required|numeric|min:1900|max:2023',
+            'author_id' => 'required',
+            'category_id' => 'required'
         ]);
 
         $article->update($values);
@@ -43,5 +54,33 @@ class AdminController extends Controller
         Article::destroy([$article->id]);
 
         return back();
+    }
+
+    public function create()
+    {
+        $authors = Author::all();
+        $categories = Category::all();
+        return view('admin.articles.create', [
+            'authors' => $authors,
+            'categories' => $categories
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $atributes = $request->validate([
+            'name' => 'required',
+            'excerpt' => 'required|min:10|max:200',
+            'description' => 'required|min:10|max:2000',
+            'release_year' => 'required|numeric|min:1900|max:2023',
+            'author_id' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        $atributes['user_id'] = auth()->id();
+
+        Article::create($atributes);
+
+
     }
 }
