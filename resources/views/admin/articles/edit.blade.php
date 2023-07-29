@@ -47,7 +47,13 @@
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="sm:col-span-4">
                         <x-form.label name="author"/>
-                        <x-form.input name="author" type="text" :value="$article->author->name"/>
+                        <x-form.dropdown-article-author name="author_id" :current_author="$article->author->id" :authors="$authors"/>
+                    </div>
+                </div>
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-4">
+                        <x-form.label name="category"/>
+                        <x-form.dropdown-article-category name="category_id" :current_category="$article->category->id" :categories="$categories"/>
                     </div>
                 </div>
                 @error('success')

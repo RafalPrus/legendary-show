@@ -1,5 +1,6 @@
+@props(['authors'])
 <x-layout heading="Edit Article">
-    <form action="" method="POST">
+    <form action="/admin/articles/store" method="POST">
         @csrf
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
@@ -43,7 +44,18 @@
                         <x-form.input name="release_year" type="text"/>
                     </div>
                 </div>
-                <x-form.dropdown-menu />
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-4">
+                        <x-form.label name="author"/>
+                        <x-form.dropdown-article-author name="author_id" :authors="$authors"/>
+                    </div>
+                </div>
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-4">
+                        <x-form.label name="category"/>
+                        <x-form.dropdown-article-category name="category_id" :categories="$categories"/>
+                    </div>
+                </div>
                 @error('success')
                 <p class="text-green-500 text-xs mt-2">{{ $message }}</p>
                 @enderror

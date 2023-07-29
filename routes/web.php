@@ -40,6 +40,7 @@ Route::post('articles/{article}/comment', [ArticleCommentController::class, 'sto
 Route::get('admin/articles', [AdminController::class, 'index'])->middleware('admin');
 Route::get('admin/articles/create', [AdminController::class, 'create'])->middleware('admin');
 Route::get('admin/articles/{article}/edit', [AdminController::class, 'edit'])->middleware('admin');
+Route::post('admin/articles/store', [AdminController::class, 'store'])->middleware('admin');
 Route::patch('admin/articles/{article}/update', [AdminController::class, 'update'])->middleware('admin');
 Route::delete('admin/articles/{article}/delete', [AdminController::class, 'destroy'])->middleware('admin');
 

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -27,6 +28,7 @@ class ArticleFactory extends Factory
             'category_id' => Category::factory(),
             'release_year' => fake()->numberBetween(1920, 2023),
             'author_id' => Author::factory(),
+            'user_id' => User::factory()
         ];
     }
 }
