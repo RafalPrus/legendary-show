@@ -11,6 +11,7 @@ class UserArticleController extends Controller
     //
     public function index(User $user)
     {
+        $this->authorize('article_access', $user->id);
         $articles = $user->articles()->get();
         return view('User.favarticles.index', [
             'articles' => $articles
@@ -19,6 +20,7 @@ class UserArticleController extends Controller
 
     public function store(User $user, Article $article)
     {
+        $this->authorize('article_access', $user->id);
         $user->articles()->attach($article->id);
 
         return back();
@@ -26,6 +28,7 @@ class UserArticleController extends Controller
 
     public function destroy(User $user, Article $article)
     {
+        $this->authorize('article_access', $user->id);
         $user->articles()->detach($article->id);
 
         return back();

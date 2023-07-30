@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->name === 'admin';
         });
 
+        Gate::define('article_access', function (User $user, $id){
+            return $user->id === $id;
+        });
+
 
     }
 }
