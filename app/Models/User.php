@@ -51,6 +51,6 @@ class User extends Authenticatable
 
     public function articles(): BelongsToMany
     {
-        return $this->belongsToMany(Article::class, 'users_articles');
+        return $this->belongsToMany(Article::class, 'users_articles')->withPivot('created_at');
     }
 }

@@ -5,22 +5,32 @@
                 <div class="mt-4 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <tbody class="bg-white divide-y divide-gray-200">
+                        <x-table.head-table />
                         @foreach ($articles as $article)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            <a href="/admin/articles/{{ $article->id }}/edit">
+                                            <a href="/articles/{{ $article->id }}">
                                                 {{ $article->name }}
                                             </a>
                                         </div>
                                     </div>
                                 </td>
-
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="/admin/articles/{{ $article->id }}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {{ $article->author->name }}
+                                        </div>
+                                    </div>
                                 </td>
-
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {{ $article->pivot->created_at->diffForHumans() }}
+                                        </div>
+                                    </div>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <form method="POST" action="/admin/articles/{{ $article->id }}/delete">
                                         @csrf
