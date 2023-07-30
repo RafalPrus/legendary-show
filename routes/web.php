@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,10 @@ Route::patch('users/{user}', [UserController::class, 'update'])->middleware('aut
 
 // User
 Route::post('articles/{article}/comment', [ArticleCommentController::class, 'store'])->middleware('auth');
+
+Route::get('users/articles/{user}/index', [UserArticleController::class, 'index'])->middleware('auth');
+Route::post('users/articles/{user}/store/{article}', [UserArticleController::class, 'store'])->middleware('auth');
+Route::delete('users/articles/{user}/delete/{article}', [UserArticleController::class, 'destroy'])->middleware('auth');
 
 // Admin
 Route::get('admin/articles', [AdminController::class, 'index'])->middleware('admin');

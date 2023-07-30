@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->integer('release_year');
             $table->foreignId('author_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

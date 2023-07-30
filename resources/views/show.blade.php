@@ -30,7 +30,24 @@
         <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
             <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                 <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ ucwords($article->name) }}</h1>
+                @auth
+                    <div class="mt-2">
+                    @if(auth()->user()->articles()->get()->contains($article))
+                            <form action="/users/articles/{{ auth()->id() }}/delete/{{ $article->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Remove from favourites</button>
+                            </form>
+                    @else
+                        <form action="/users/articles/{{ auth()->id() }}/store/{{ $article->id }}" method="POST">
+                            @csrf
+                            <button type="submit" class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add to favourites</button>
+                        </form>
+                    @endif
+                    </div>
+                @endauth
             </div>
+
 
             <!-- Options -->
             <div class="mt-4 lg:row-span-3 lg:mt-0">
