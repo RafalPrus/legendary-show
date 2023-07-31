@@ -10,7 +10,7 @@ class ArticleController extends Controller
     //
     public function index()
     {
-        $articles = Article::filter(request(['category']))->paginate(7);
+        $articles = Article::filter(request(['category', 'type']))->paginate(7)->withQueryString();
         return view('index', ['articles' => $articles]);
     }
 

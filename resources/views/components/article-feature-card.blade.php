@@ -10,10 +10,15 @@
             <h3 class="mt-4 text-xl text-gray-700">{{ ucwords($article->name) }}</h3>
             <h4 class="mt-2 text-l text-gray-500">{{ $article->excerpt }}</h4>
             <h4 class="mt-2 text-m text-gray-600">{{ $article->release_year }}</h4>
-            <x-badge class="text-xs">
+            <x-badge class="text-xs text-indigo-600">
                 {{ $article->category->name }}
+            </x-badge>
+            <x-badge class="text-xs text-gray-600">
+                {{ $article->type->name }}
             </x-badge>
             </div>
         </div>
     </a>
 </div>
+
+{{--<span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">--}}

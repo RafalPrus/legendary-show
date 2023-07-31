@@ -10,7 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $with = ['category'];
+    protected $with = ['category', 'type', 'author'];
 
     protected $guarded = [];
 
@@ -27,6 +27,14 @@ class Article extends Model
                     ->whereColumn('categories.id', 'articles.category_id')
                     ->where('categories.name', $category))
         );
+
+        $query->when($filters['type'] ?? false, fn($query, $category) =>
+        $query
+            ->whereExists(fn($query) =>
+            $query->from('types')
+                ->whereColumn('types.id', 'articles.type_id')
+                ->where('types.name', $category))
+        );
     }
 
     public function author()
@@ -42,6 +50,11 @@ class Article extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 
     public function users(): BelongsToMany
