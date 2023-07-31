@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('excerpt');
             $table->text('description');
+            $table->foreignId('type_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->integer('release_year');
             $table->foreignId('author_id')->constrained();

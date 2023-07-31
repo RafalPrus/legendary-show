@@ -3,7 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MovieArticleController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SeriesArticleController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserController;
@@ -23,6 +25,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ArticleController::class, 'index'])->name('home');
 Route::get('articles/{article}', [ArticleController::class, 'show']);
+
+// movies
+Route::get('movies', [MovieArticleController::class, 'index'])->name('movies');
+
+// tv series
+Route::get('series', [SeriesArticleController::class, 'index'])->name('series');
+
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
