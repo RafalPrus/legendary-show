@@ -15,7 +15,12 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = auth()->user();
-        if ($user->name === $request->name && $user->email === $request->email) {
+        if ($request->file('avatar') !== null) {
+            $request->validate([
+                'avatar' => 'image|mimes:jpeg|max:2048'
+            ]);
+        }
+        if ($user->name === $request->name && $user->email === $request->email && (!$request->file('avatar'))) {
             return back()
                 ->withErrors([
                     'input' => 'Provided data is the same. Nothing to update'
@@ -35,7 +40,10 @@ class UserController extends Controller
             ]);
         }
 
+
+
         $user->update($attributes);
+        $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
 
 
 
