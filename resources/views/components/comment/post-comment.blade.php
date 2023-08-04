@@ -1,6 +1,6 @@
 <article class="flex space-x-4">
     <div class="flex-shrink-0">
-        <img src="{{$comment->author->getFirstMediaUrl('avatars') ?? ('https://i.pravatar.cc/60?u=' . $comment->user_id) }}" alt="" width="60" height="60" class="rounded-xl">
+        <img src="{{$comment->author->getFirstMediaUrl('avatars') ? $comment->author->getFirstMediaUrl('avatars') : asset('storage/images/default_avatar.jpg') }}" alt="" width="60" height="60" class="rounded-xl">
     </div>
 
     <div>
