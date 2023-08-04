@@ -22,7 +22,7 @@
         <!-- Image gallery -->
         <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 lg:gap-x-8 lg:px-8">
             <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-                <img src="{{ asset('storage/images/br_c.jpg') }}" alt="Two each of gray, white, and black shirts laying flat." class="h-full w-full object-cover object-center">
+                <img src="{{ $article->getFirstMediaUrl('covers') ? $article->getFirstMediaUrl('covers') : asset('storage/images/default_cover.jpg') }}" alt="Two each of gray, white, and black shirts laying flat." class="h-full w-full object-cover object-center">
             </div>
         </div>
 
