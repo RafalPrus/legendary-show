@@ -11,6 +11,9 @@
 |
 */
 
+use App\Models\User;
+use PHPUnit\Framework\ExpectationFailedException;
+
 uses(
     Tests\TestCase::class,
     // Illuminate\Foundation\Testing\RefreshDatabase::class,
@@ -31,6 +34,14 @@ expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
 
+expect()->extend('toBeValidEmail', function () {
+    expect($this->value)->toBeString()->toContain('@', '.');
+
+    if (! filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
+        throw new ExpectationFailedException('Invalid email adress');
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -41,7 +52,11 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-
+function login($user = null)
+{
+    return test()->actingAs($user ?? User::factory()->create());
+    // helper function test() allows referring to TestCase class, while it is calling inside a test
+}
 function something()
 {
     // ..
