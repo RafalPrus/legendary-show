@@ -27,6 +27,30 @@ it('It is logged in', function() {
 
 it('It can add a comment to article', function () {
     login($this->user)->post("articles/{$this->article->id}/comment", [
-        Comment::factory()->create()
-    ]);
+            'article_id' => $this->article->id,
+            'user_id' => $this->user->id,
+            'body' => 'A test comment'
+        ])->assertStatus(302);
+
+    expect($this->article->comments)->not->toBeEmpty();
+});
+
+it('It can add article to favourites', function() {
+    login($this->user)
+        ->post("users/articles/{$this->user->id}/store/{$this->article->id}")
+        ->assertStatus(302);
+
+    expect(count($this->user->articles))->toBe(1);
+});
+
+it('It can delete article from favourites', function() {
+    login($this->user)
+        ->post("users/articles/{$this->user->id}/store/{$this->article->id}")
+        ->assertStatus(302);
+
+    login($this->user)
+        ->delete("users/articles/{$this->user->id}/delete/{$this->article->id}")
+        ->assertStatus(302);
+
+    expect(count($this->user->articles))->toBe(0);
 });
