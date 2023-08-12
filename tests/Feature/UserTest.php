@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 beforeEach(function () {
     Type::factory(2)->create();
-    $this->user = User::factory()->create();
+    $this->user = User::factory()->create([
+        'password' => 'secret'
+    ]);
     $this->article = Article::factory()->create();
 });
 
@@ -53,4 +55,31 @@ it('It can delete article from favourites', function() {
         ->assertStatus(302);
 
     expect(count($this->user->articles))->toBe(0);
+});
+
+it('Can log in', function () {
+    Auth::attempt(['email' => $this->user->email, 'password' => 'secret']);
+    expect(Auth::check())->toBeTrue();
+});
+
+it('Can log in via endpoint', function () {
+    $this->post('login', [
+        'email' => $this->user->email,
+        'password' => 'secret'
+    ])->assertStatus(302);
+
+    expect(Auth::check())->toBeTrue();
+});
+
+it('Cannot log in via endpoint with incorrect email', function () {
+    $response = $this->post('login', [
+        'email' => $this->user->email . 'bad',
+        'password' => 'secret'
+    ]);
+
+    $response->assertSessionHasErrors([
+        'password' => 'Email or password incorrect'
+    ]);
+
+    expect(Auth::check())->toBeFalse();
 });
