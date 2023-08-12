@@ -54,3 +54,23 @@ it('It can delete article from favourites', function() {
 
     expect(count($this->user->articles))->toBe(0);
 });
+
+it('Can log in', function () {
+    Auth::attempt(['email' => $this->user->email, 'password' => 'secret']);
+    expect(Auth::check())->toBeTrue();
+});
+
+it('Can log in via endpoint', function () {
+    $this->post('login', [
+        'email' => $this->user->email,
+        'password' => 'secret'
+    ])->assertStatus(302);
+
+    expect(Auth::check())->toBeTrue();
+});
+
+it('Cannot log in via endpoint with incorrect email', function () {
+    $response = $this->post('login', [
+        'email' => $this->user->email . 'bad',
+        'password' => 'secret'
+    ]);
