@@ -34,22 +34,6 @@ class UserController extends Controller
         ]);
 
 
-//        elseif ($user->name === $request->name && $user->email !== $request->email) {
-//            $attributes = $request->validate([
-//                'email' => 'required|email|unique:users,email'
-//            ]);
-//        } elseif ($user->name !== $request->name && $user->email === $request->email) {
-//            $attributes = $request->validate([
-//                'name' => 'required|unique:users,name'
-//            ]);
-//        } else {
-//            $attributes = $request->validate([
-//                'name' => 'required|unique:users,name',
-//                'email' => 'required|email|unique:users,email'
-//            ]);
-//        }
-
-
 
         $user->update(Arr::except($attributes, ['avatar']));
         if($request->file('avatar') !== null) {

@@ -2,7 +2,7 @@
 <div class="col-span-6 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
     <a href="/articles/{{ $article->id }}" class="group col-span-3 grid xl:grid-cols-3">
         <div class="col-span-2 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-6 xl:aspect-w-7">
-                <img src="{{ asset('/storage/images/br2.jpg') }}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full max-h-96 object-cover object-left-top group-hover:opacity-75">
+                <img src="{{ $article->getFirstMediaUrl('covers') ? $article->getFirstMediaUrl('covers') : asset('storage/images/default_cover.jpg') }}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full max-h-96 object-cover object-left-top group-hover:opacity-75">
         </div>
         <div class="col-span-1 ml-6 relative">
             <div class="absolute bottom-0 left-">
