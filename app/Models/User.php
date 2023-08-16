@@ -54,7 +54,7 @@ class User extends Authenticatable implements HasMedia
 
     public function articles(): BelongsToMany
     {
-        return $this->belongsToMany(Article::class, 'users_articles')->withPivot('created_at');
+        return $this->belongsToMany(Article::class)->withPivot('created_at');
     }
 
     public function registerMediaConversions(Media|\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
