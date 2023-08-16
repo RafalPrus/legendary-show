@@ -62,7 +62,7 @@ class Article extends Model implements HasMedia
 
     public function users(): BelongsToMany
     {
-        $this->belongsToMany(User::class, 'users_articles');
+        $this->belongsToMany(User::class);
     }
 
     public function registerMediaConversions(Media|\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
