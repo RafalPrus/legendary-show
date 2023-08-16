@@ -32,7 +32,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <form method="POST" action="/admin/articles/{{ $article->id }}/delete">
+                                    <form method="POST" action="/users/articles/{{ auth()->id() }}/delete/{{ $article->id }}">
                                         @csrf
                                         @method('DELETE')
 
